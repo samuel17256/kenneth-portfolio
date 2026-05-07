@@ -5,638 +5,295 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kenneth Vongrim Ponfa — Filmmaker & Creative Director</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./src/output.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap"
         rel="stylesheet">
-    <style>
-        :root {
-            --gold: #C9A84C;
-            --gold-light: #E8C96A;
-            --cream: #F5F0E8;
-            --charcoal: #1A1A1A;
-            --mid: #2E2E2E;
-            --dim: #666;
-            --film-red: #C0392B;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--charcoal);
-            color: var(--cream);
-            font-family: 'Cormorant Garamond', serif;
-            overflow-x: hidden;
-        }
-
-        /* Film grain overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.35;
-        }
-
-        .font-display {
-            font-family: 'Bebas Neue', sans-serif;
-        }
-
-        .font-mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .font-serif {
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        /* Gold text */
-        .text-gold {
-            color: var(--gold);
-        }
-
-        .text-gold-light {
-            color: var(--gold-light);
-        }
-
-        .text-cream {
-            color: var(--cream);
-        }
-
-        .text-dim {
-            color: var(--dim);
-        }
-
-        /* Borders */
-        .border-gold {
-            border-color: var(--gold);
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--charcoal);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 2px;
-        }
-
-        /* Hero */
-        .hero-bg {
-            background: linear-gradient(160deg, #0d0d0d 0%, #1a1a1a 40%, #111 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at 70% 50%, rgba(201, 168, 76, 0.08) 0%, transparent 65%);
-            pointer-events: none;
-        }
-
-        /* Film strip decoration */
-        .film-strip {
-            display: flex;
-            gap: 4px;
-            align-items: center;
-        }
-
-        .film-hole {
-            width: 10px;
-            height: 10px;
-            border: 1.5px solid var(--gold);
-            border-radius: 2px;
-            opacity: 0.6;
-        }
-
-        /* Nav */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            backdrop-filter: blur(12px);
-            background: rgba(26, 26, 26, 0.88);
-            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
-        }
-
-        .nav-link {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--dim);
-            transition: color 0.3s;
-        }
-
-        .nav-link:hover {
-            color: var(--gold);
-        }
-
-        /* Fade in animation */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideRight {
-            from {
-                width: 0;
-            }
-
-            to {
-                width: 100%;
-            }
-        }
-
-        .animate-fade-up {
-            animation: fadeUp 0.9s ease forwards;
-        }
-
-        .animate-fade-in {
-            animation: fadeIn 1.2s ease forwards;
-        }
-
-        .delay-1 {
-            animation-delay: 0.2s;
-            opacity: 0;
-        }
-
-        .delay-2 {
-            animation-delay: 0.4s;
-            opacity: 0;
-        }
-
-        .delay-3 {
-            animation-delay: 0.6s;
-            opacity: 0;
-        }
-
-        .delay-4 {
-            animation-delay: 0.8s;
-            opacity: 0;
-        }
-
-        .delay-5 {
-            animation-delay: 1.0s;
-            opacity: 0;
-        }
-
-        /* Gold underline */
-        .gold-line {
-            display: block;
-            height: 2px;
-            background: linear-gradient(90deg, var(--gold), transparent);
-            width: 60px;
-            margin: 12px 0;
-        }
-
-        /* Section heading */
-        .section-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--gold);
-        }
-
-        /* Card */
-        .card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(201, 168, 76, 0.12);
-            transition: border-color 0.3s, background 0.3s, transform 0.3s;
-        }
-
-        .card:hover {
-            border-color: rgba(201, 168, 76, 0.45);
-            background: rgba(255, 255, 255, 0.055);
-            transform: translateY(-4px);
-        }
-
-        /* Role badge */
-        .role-badge {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 3px 10px;
-            border-radius: 2px;
-        }
-
-        /* Skill pill */
-        .skill-pill {
-            background: rgba(201, 168, 76, 0.08);
-            border: 1px solid rgba(201, 168, 76, 0.25);
-            color: var(--gold-light);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            letter-spacing: 0.1em;
-            padding: 5px 14px;
-            border-radius: 2px;
-            transition: background 0.3s;
-        }
-
-        .skill-pill:hover {
-            background: rgba(201, 168, 76, 0.18);
-        }
-
-        /* Timeline dot */
-        .timeline-dot {
-            width: 10px;
-            height: 10px;
-            border: 2px solid var(--gold);
-            background: var(--charcoal);
-            border-radius: 50%;
-            flex-shrink: 0;
-            margin-top: 6px;
-        }
-
-        /* Horizontal rule */
-        .hr-gold {
-            border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            opacity: 0.3;
-        }
-
-        /* Large number */
-        .stat-number {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3.5rem;
-            color: var(--gold);
-            line-height: 1;
-        }
-
-        /* Overlay quote */
-        blockquote {
-            font-style: italic;
-            font-size: 1.25rem;
-            line-height: 1.7;
-            color: var(--cream);
-            opacity: 0.85;
-        }
-
-        /* CTA button */
-        .btn-primary {
-            background: var(--gold);
-            color: var(--charcoal);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            padding: 14px 36px;
-            transition: background 0.3s, transform 0.2s;
-            border: none;
-            cursor: pointer;
-            border-radius: 2px;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            border: 1.5px solid var(--gold);
-            color: var(--gold);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            padding: 13px 36px;
-            transition: all 0.3s;
-            cursor: pointer;
-            background: transparent;
-            border-radius: 2px;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-outline:hover {
-            background: rgba(201, 168, 76, 0.1);
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        footer {
-            background: #0d0d0d;
-            border-top: 1px solid rgba(201, 168, 76, 0.15);
-        }
-
-        /* Responsive big heading */
-        @media (max-width: 768px) {
-            .hero-name {
-                font-size: 13vw !important;
-            }
-        }
-
-        /* Scroll reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(25px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: none;
-        }
-    </style>
 </head>
 
-<body>
+<body class="font-serif overflow-x-hidden scroll-smooth">
 
     <!-- ══════════ NAV ══════════ -->
-    <nav class="px-6 py-4">
+    <nav class="fixed top-0 left-0 right-0 z-100 backdrop-blur-md bg-black/75 border-b border-red-500 px-6 py-4">
         <div class="max-w-6xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="film-strip">
-                    <div class="film-hole"></div>
-                    <div class="film-hole"></div>
-                    <div class="film-hole"></div>
+                <div class="flex gap-1 items-center">
+                    <span class="w-2.5 h-2.5 border border-red-500 rounded-sm"></span>
+                    <span class="w-2.5 h-2.5 border border-red-500 rounded-sm"></span>
+                    <span class="w-2.5 h-2.5 border border-red-500 rounded-sm"></span>
                 </div>
-                <span class="font-display text-gold" style="font-size:1.1rem;letter-spacing:0.1em;">KVP</span>
+                <span class="font-display text-red-500 text-lg tracking-widest">KVP</span>
             </div>
+
+            <!-- Desktop nav -->
             <div class="hidden md:flex items-center gap-8">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#work" class="nav-link">Work</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#about"
+                    class="font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white hover:text-red-500 transition-colors duration-300">About</a>
+                <a href="#services"
+                    class="font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white hover:text-red-500 transition-colors duration-300">Services</a>
+                <a href="#work"
+                    class="font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white hover:text-red-500 transition-colors duration-300">Work</a>
+                <a href="#experience"
+                    class="font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white hover:text-red-500 transition-colors duration-300">Experience</a>
+                <a href="#contact"
+                    class="font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white hover:text-red-500 transition-colors duration-300">Contact</a>
             </div>
-            <a href="#contact" class="btn-primary" style="padding:10px 22px;font-size:0.62rem;">Hire Me</a>
+            <a href="#contact"
+                class="font-mono text-[0.62rem] tracking-[0.2em] uppercase bg-red-500 text-white px-5.5 py-2.5 rounded-sm hover:bg-red-light hover:-translate-y-0.5 transition-all duration-300 hidden md:block">Hire
+                Me</a>
+
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none relative z-50">
+                <svg id="menu-icon" class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+                <svg id="close-icon" class="w-6 h-6 text-white hidden" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-full left-0 right-0 bg-black/95 border-b border-red-500 backdrop-blur-md">
+            <div class="flex flex-col px-6 py-4 gap-1">
+                <a href="#about"
+                    class="mobile-link font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white hover:text-red-500 py-3 border-b border-white/5 transition-colors duration-300">About</a>
+                <a href="#services"
+                    class="mobile-link font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white hover:text-red-500 py-3 border-b border-white/5 transition-colors duration-300">Services</a>
+                <a href="#work"
+                    class="mobile-link font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white hover:text-red-500 py-3 border-b border-white/5 transition-colors duration-300">Work</a>
+                <a href="#experience"
+                    class="mobile-link font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white hover:text-red-500 py-3 border-b border-white/5 transition-colors duration-300">Experience</a>
+                <a href="#contact"
+                    class="mobile-link font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white hover:text-red-500 py-3 border-b border-white/5 transition-colors duration-300">Contact</a>
+                <a href="#contact"
+                    class="mobile-link font-mono text-[0.62rem] tracking-[0.2em] uppercase bg-red-500 text-white text-center px-5 py-3 rounded-sm hover:bg-red-600 transition-all duration-300 mt-3">Hire
+                    Me</a>
+            </div>
         </div>
     </nav>
 
 
-    <!-- ══════════ HERO ══════════ -->
-    <section class="hero-bg min-h-screen flex flex-col justify-center pt-24 pb-16 px-6" id="home">
-        <div class="flex mx-auto max-w-6xl gap-12 items-center flex-col-reverse md:flex-row">
-            <div class="">
 
-                <!-- Top label -->
+    <!-- ══════════ HERO ══════════ -->
+    <section id="home"
+        class="relative min-h-screen flex flex-col justify-center pt-24 pb-16 px-6 bg-[linear-gradient(160deg,#0d0d0d_0%,#1a1a1a_40%,#111_100%)] overflow-hidden">
+        <div class="max-w-6xl mx-auto flex gap-12 items-center flex-col-reverse md:flex-row">
+            <div>
                 <div class="flex items-center gap-4 mb-8 animate-fade-up delay-1">
-                    <span class="section-label">Creative Director · Filmmaker</span>
-                    <span class="text-gold opacity-40">——</span>
-                    <span class="font-mono text-xs" style="color:var(--dim)">Based in Jos, Nigeria</span>
+                    <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-red-500">Creative Director ·
+                        Filmmaker</span>
+                    <span class="text-red-500">——</span>
+                    <span class="font-mono text-xs text-white">Based in Jos, Nigeria</span>
                 </div>
 
-                <!-- Name -->
-                <h1 class="hero-name font-display text-cream animate-fade-up delay-2"
-                    style="font-size:clamp(3.5rem, 10vw, 9rem); line-height:0.92; letter-spacing:0.02em;">
+                <h1 class="animate-fade-up delay-2 font-display text-red-50 leading-[0.92] tracking-[0.02em] text-8xl">
                     KENNETH<br>
-                    <span class="text-gold">VONGRIM</span><br>
+                    <span class="text-red-500">VONGRIM</span><br>
                     PONFA
                 </h1>
 
-                <!-- Gold rule -->
-                <div class="animate-fade-up delay-3">
-                    <span class="gold-line" style="width:120px; margin:28px 0;"></span>
+                <div
+                    class="animate-fade-up delay-3 block h-0.5 w-30 my-7 bg-[linear-gradient(90deg,#C0392B,transparent)]">
                 </div>
 
-                <!-- Tagline -->
-                <p class="animate-fade-up delay-3 font-serif text-cream"
-                    style="font-size:1.25rem; max-width:560px; line-height:1.8; opacity:0.8;">
-                    Crafting stories that <em class="text-gold-light">educate, entertain,</em> and create change —
+                <p class="animate-fade-up delay-3 font-serif text-red-50 text-[1.25rem] leading-[1.8] max-w-140">
+                    Crafting stories that <em class="text-red-500 not-italic">educate, entertain,</em> and create change
+                    —
                     from documentary to commercial, frame by frame.
                 </p>
 
-                <!-- Role badges -->
                 <div class="flex flex-wrap gap-3 mt-8 animate-fade-up delay-4">
-                    <span class="role-badge">Director</span>
-                    <span class="role-badge">Editor</span>
-                    <span class="role-badge">Sound Recordist</span>
-                    <span class="role-badge">Cinematographer</span>
-                    <span class="role-badge">Project Manager</span>
+                    <span
+                        class="font-mono text-[0.6rem] tracking-[0.15em] uppercase border border-red-500 text-red-50 light px-2.5 py-0.5 rounded-sm">Director</span>
+                    <span
+                        class="font-mono text-[0.6rem] tracking-[0.15em] uppercase border border-red-500 text-red-50 light px-2.5 py-0.5 rounded-sm">Editor</span>
+                    <span
+                        class="font-mono text-[0.6rem] tracking-[0.15em] uppercase border border-red-500 text-red-50 light px-2.5 py-0.5 rounded-sm">Sound
+                        Recordist</span>
+                    <span
+                        class="font-mono text-[0.6rem] tracking-[0.15em] uppercase border border-red-500 text-red-50 light px-2.5 py-0.5 rounded-sm">Cinematographer</span>
+                    <span
+                        class="font-mono text-[0.6rem] tracking-[0.15em] uppercase border border-red-500 text-red-50 light px-2.5 py-0.5 rounded-sm">Project
+                        Manager</span>
                 </div>
 
-                <!-- CTA -->
                 <div class="flex flex-wrap gap-4 mt-12 animate-fade-up delay-5">
-                    <a href="#work" class="btn-primary">View My Work</a>
-                    <a href="#contact" class="btn-outline">Get In Touch</a>
+                    <a href="#work"
+                        class="font-mono text-[0.7rem] tracking-[0.2em] uppercase bg-red-500 text-white px-9 py-3.5 rounded-sm hover:bg-red-600 hover:-translate-y-0.5 transition-all duration-300 no-underline inline-block">View
+                        My Work</a>
+                    <a href="#contact"
+                        class="font-mono text-[0.7rem] tracking-[0.2em] uppercase border border-red-500 text-red-100 px-9 py-3.25 rounded-sm hover:bg-red-600 hover:-translate-y-0.5 transition-all duration-300 no-underline inline-block">Get
+                        In Touch</a>
                 </div>
 
-                <!-- Stats -->
-                <div class="grid grid-cols-3 gap-8 mt-20 pt-10 border-t animate-fade-up delay-5"
-                    style="border-color:rgba(201,168,76,0.15); max-width:480px;">
+                <div
+                    class="grid grid-cols-3 gap-8 mt-20 pt-10 border-t border-red-400 max-w-120 animate-fade-up delay-5">
                     <div>
-                        <div class="stat-number">5+</div>
-                        <p class="font-mono text-xs mt-1" style="color:var(--dim); letter-spacing:0.08em;">Years Active
-                        </p>
+                        <div class="font-display text-red-100 text-[3.5rem] leading-none">5+</div>
+                        <p class="font-mono text-xs mt-1 text-red-50 tracking-[0.08em]">Years Active</p>
                     </div>
                     <div>
-                        <div class="stat-number">3</div>
-                        <p class="font-mono text-xs mt-1" style="color:var(--dim); letter-spacing:0.08em;">Studios</p>
+                        <div class="font-display text-red-100 text-[3.5rem] leading-none">3</div>
+                        <p class="font-mono text-xs mt-1 text-red-50 tracking-[0.08em]">Studios</p>
                     </div>
                     <div>
-                        <div class="stat-number">2</div>
-                        <p class="font-mono text-xs mt-1" style="color:var(--dim); letter-spacing:0.08em;">Productions
-                        </p>
+                        <div class="font-display text-red-100 text-[3.5rem] leading-none">2</div>
+                        <p class="font-mono text-xs mt-1 text-red-50 tracking-[0.08em]">Productions</p>
                     </div>
                 </div>
             </div>
+
             <div>
-                <img src="./src/public/kvgp.jpeg" alt="kenneth vongrim ponfa" class="rounded-lg shadow-lg reveal h-auto max-w-full">
+                <img src="./src/public/kvgp.jpeg" alt="kenneth vongrim ponfa"
+                    class="rounded-lg shadow-lg h-auto max-w-full ">
             </div>
         </div>
     </section>
 
 
     <!-- ══════════ ABOUT ══════════ -->
-    <section id="about" class="py-28 px-6">
+    <section id="about" class="py-28 px-6 bg-[linear-gradient(160deg,#0d0d0d_0%,#1a1a1a_40%,#111_100%)]">
         <div class="max-w-6xl mx-auto">
             <div class="grid md:grid-cols-2 gap-16 items-center">
 
-                <!-- Left: visual block -->
                 <div class="reveal">
-                    <div class="relative" style="max-width:420px;">
-                        <!-- Frame box -->
-                        <div class="w-full aspect-square card"
-                            style="display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;">
-                            <!-- decorative inner -->
-                            <div class="absolute inset-6 border" style="border-color:rgba(201,168,76,0.2);"></div>
-                            <div class="text-center px-10">
-                                  <img src="./src/public/hero-bg.jpeg" alt="hero-bg" class="absolute inset-0 w-full h-full object-cover opacity-15">
-                                <div class="font-display text-gold"
-                                    style="font-size:5rem; line-height:1; opacity:0.15;">KVP</div>
-                                <div class="font-display text-gold mt-4"
-                                    style="font-size:1.5rem; letter-spacing:0.2em; opacity:0.7;">VONGRIM FILMS</div>
-                                <div class="hr-gold mt-4"></div>
-                                <div class="font-mono text-xs mt-4 text-white" style="letter-spacing:0.15em;">
-                                    PRODUCTION HOUSE</div>
+                    <div class="relative max-w-105">
+                        <div
+                            class="w-full aspect-square bg-white/3 border border-red-500 flex items-center justify-center relative overflow-hidden hover:border-red-500 hover:bg-white/6 transition-all duration-300">
+
+                            <!-- Image moved here, sibling to text div -->
+                            <img src="./src/public/hero-bg.jpeg" alt=""
+                                class="absolute inset-0 w-full h-full object-cover opacity-15">
+
+                            <div class="absolute inset-6 border border-red-500"></div>
+
+                            <div class="text-center px-10 relative z-10">
+                                <!-- Image removed from here -->
+                                <div class="font-display text-red-500 text-[5rem] leading-none">KVP</div>
+                                <div class="font-display text-red-50 text-[1.5rem] tracking-[0.2em] mt-4">VONGRIM FILMS
+                                </div>
+                                <div
+                                    class="h-px my-4 bg-[linear-gradient(90deg,transparent,#C0392B,transparent)] opacity-35">
+                                </div>
+                                <div class="font-mono text-xs text-white tracking-[0.15em]">PRODUCTION HOUSE</div>
                             </div>
-                            <!-- corner accents -->
-                            <span class="absolute top-3 left-3 w-5 h-5 border-t border-l border-gold opacity-50"></span>
+
                             <span
-                                class="absolute top-3 right-3 w-5 h-5 border-t border-r border-gold opacity-50"></span>
+                                class="absolute top-3 left-3 w-5 h-5 border-t border-l border-red-500 opacity-60"></span>
                             <span
-                                class="absolute bottom-3 left-3 w-5 h-5 border-b border-l border-gold opacity-50"></span>
+                                class="absolute top-3 right-3 w-5 h-5 border-t border-r border-red-500 opacity-60"></span>
                             <span
-                                class="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-gold opacity-50"></span>
+                                class="absolute bottom-3 left-3 w-5 h-5 border-b border-l border-red-500 opacity-60"></span>
+                            <span
+                                class="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-red-500 opacity-60"></span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right: text -->
                 <div class="reveal">
-                    <span class="section-label">About Me</span>
-                    <span class="gold-line"></span>
-                    <h2 class="font-display text-cream mt-2"
-                        style="font-size:3rem; letter-spacing:0.04em; line-height:1.1;">
-                        CREATIVE STORYTELLER<br>
-                        <span class="text-gold">& DIGITAL CREATOR</span>
+                    <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-red-500">About Me</span>
+                    <div class="block h-0.5 w-15 my-3 bg-[linear-gradient(90deg,#C0392B,transparent)]"></div>
+                    <h2 class="font-display text-white text-[3rem] tracking-[0.04em] leading-[1.1] mt-2">
+                        CREATIVE STORYTELLER<br><span class="text-red-500">& DIGITAL CREATOR</span>
                     </h2>
-                    <p class="font-serif mt-6"
-                        style="font-size:1.1rem; line-height:1.9; color:var(--cream); opacity:0.8;">
-                        I am Kenneth Vongrim Ponfa — a Director, Editor, and Sound Recordist with a deep passion
-                        for visual storytelling. I blend creativity with strategy to produce content that resonates
-                        with real people and real emotions.
+                    <p class="font-serif text-white/80 mt-6 text-[1.1rem] leading-[1.9]">
+                        I am Kenneth Vongrim Ponfa — a Director, Editor, and Sound Recordist with a deep passion for
+                        visual storytelling. I blend creativity with strategy to produce content that resonates with
+                        real people and real emotions.
                     </p>
-                    <p class="font-serif mt-4" style="font-size:1.1rem; line-height:1.9; opacity:0.65;">
-                        My work spans documentary film, music videos, commercials, and social content — always
-                        anchored in entertainment, culture, and social impact. Whether behind the camera, in the
-                        editing room, or developing fresh ideas, I believe powerful stories can <em
-                            class="text-gold-light">educate,
-                            entertain, and create change.</em>
+                    <p class="font-serif text-white/80 mt-4 text-[1.1rem] leading-[1.9]">
+                        My work spans documentary film, music videos, commercials, and social content — always anchored
+                        in entertainment, culture, and social impact. Whether behind the camera, in the editing room, or
+                        developing fresh ideas, I believe powerful stories can <em
+                            class="text-red-500 not-italic">educate, entertain, and create change.</em>
                     </p>
-
-                    <!-- Companies -->
-                    <div class="mt-8 pt-8 border-t" style="border-color:rgba(201,168,76,0.15);">
-                        <p class="font-mono text-xs mb-4" style="color:var(--dim); letter-spacing:0.2em;">FOUNDER &
-                            OWNER</p>
+                    <div class="mt-8 pt-8 border-t border-red-500">
+                        <p class="font-mono text-xs mb-4 text-white/80 tracking-[0.2em]">FOUNDER & OWNER</p>
                         <div class="flex flex-wrap gap-3">
-                            <span class="skill-pill">Vongrim Films Production</span>
-                            <span class="skill-pill">MOG Films</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors duration-300">Vongrim
+                                Films Production</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors duration-300">MOG
+                                Films</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <hr class="hr-gold mx-6 max-w-6xl" style="margin-left:auto; margin-right:auto;">
-
 
     <!-- ══════════ SERVICES ══════════ -->
-    <section id="services" class="py-28 px-6">
+    <section id="services" class="py-28 px-6 bg-[linear-gradient(160deg,#0d0d0d_0%,#1a1a1a_40%,#111_100%)]">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16 reveal">
-                <span class="section-label">What I Do</span>
-                <span class="gold-line" style="margin:12px auto;"></span>
-                <h2 class="font-display text-cream mt-2" style="font-size:3.5rem; letter-spacing:0.04em;">SERVICES</h2>
+                <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-red-500">What I Do</span>
+                <div class="block h-0.5 w-15 my-3 bg-[linear-gradient(90deg,#C0392B,transparent)] mx-auto"></div>
+                <h2 class="font-display text-white text-[3.5rem] tracking-[0.04em] mt-2">SERVICES</h2>
             </div>
-
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                <!-- Card 1 -->
-                <div class="card p-8 reveal">
-                    <div class="font-display text-gold" style="font-size:2.5rem; opacity:0.3;">01</div>
-                    <h3 class="font-display text-cream mt-3" style="font-size:1.5rem; letter-spacing:0.06em;">DIRECTION
-                    </h3>
-                    <span class="gold-line"></span>
-                    <p class="font-serif mt-3" style="font-size:0.98rem; line-height:1.85; opacity:0.7;">
-                        Full-scale film direction for short films, documentaries, music videos, and commercials — from
-                        concept development to final delivery.
+                <div
+                    class="bg-white/3 border border-red-500/15 p-8 reveal hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <div class="font-display text-red-500 text-[2.5rem]">01</div>
+                    <h3 class="font-display text-white text-[1.5rem] tracking-[0.06em] mt-3">DIRECTING</h3>
+                    <div class="block h-0.5 w-15 my-3 bg-[linear-gradient(90deg,#C0392B,transparent)]"></div>
+                    <p class="font-serif text-[0.98rem] leading-[1.85] text-white/80">Full-scale film direction for
+                        short
+                        films, documentaries, music videos, and commercials — from concept development to final
+                        delivery.</p>
+                </div>
+
+                <div
+                    class="bg-white/3 border border-red-500/15 p-8 reveal hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <div class="font-display text-red-500 text-[2.5rem]">02</div>
+                    <h3 class="font-display text-white text-[1.5rem] tracking-[0.06em] mt-3">EDITING</h3>
+                    <div class="block h-0.5 w-15 my-3 bg-[linear-gradient(90deg,#C0392B,transparent)]"></div>
+                    <p class="font-serif text-[0.98rem] leading-[1.85] text-white/80">Professional post-production
+                        editing
+                        with a keen eye for pacing, narrative flow, colour grading, and visual storytelling.</p>
+                </div>
+
+                <div
+                    class="bg-white/3 border border-red-500/15 p-8 reveal hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <div class="font-display text-red-500  text-[2.5rem]">03</div>
+                    <h3 class="font-display text-white text-[1.5rem] tracking-[0.06em] mt-3">CINEMATOGRAPHY</h3>
+                    <div class="block h-0.5 w-15 my-3 bg-[linear-gradient(90deg,#C0392B,transparent)]"></div>
+                    <p class="font-serif text-[0.98rem] leading-[1.85] text-white/80">Camera operation and visual
+                        composition that creates atmosphere, depth, and cinematic impact for every project.</p>
+                </div>
+
+                <div
+                    class="bg-white/3 border border-red-500/15 p-8 reveal hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <div class="font-display text-red-500 text-[2.5rem]">04</div>
+                    <h3 class="font-display text-white text-[1.5rem] tracking-[0.06em] mt-3">SOUND RECORDING</h3>
+                    <div class="block h-0.5 w-15 my-3 bg-[linear-gradient(90deg,#C0392B,transparent)]"></div>
+                    <p class="font-serif text-[0.98rem] leading-[1.85] text-white/80">On-set and studio sound recording
+                        ensuring crisp, clean audio capture that supports the emotional power of every scene.</p>
+                </div>
+
+                <div
+                    class="bg-white/3 border border-red-500/15 p-8 reveal hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <div class="font-display text-red-500 text-[2.5rem]">05</div>
+                    <h3 class="font-display text-white text-[1.5rem] tracking-[0.06em] mt-3">CONTENT CREATION</h3>
+                    <div class="block h-0.5 w-15 my-3 bg-[linear-gradient(90deg,#C0392B,transparent)]"></div>
+                    <p class="font-serif text-[0.98rem] leading-[1.85] text-white/80">Digital content strategy and
+                        production for YouTube, social media, and brand platforms — built to engage and grow audiences.
                     </p>
                 </div>
 
-                <!-- Card 2 -->
-                <div class="card p-8 reveal">
-                    <div class="font-display text-gold" style="font-size:2.5rem; opacity:0.3;">02</div>
-                    <h3 class="font-display text-cream mt-3" style="font-size:1.5rem; letter-spacing:0.06em;">EDITING
-                    </h3>
-                    <span class="gold-line"></span>
-                    <p class="font-serif mt-3" style="font-size:0.98rem; line-height:1.85; opacity:0.7;">
-                        Professional post-production editing with a keen eye for pacing, narrative flow, colour grading,
-                        and visual storytelling.
-                    </p>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="card p-8 reveal">
-                    <div class="font-display text-gold" style="font-size:2.5rem; opacity:0.3;">03</div>
-                    <h3 class="font-display text-cream mt-3" style="font-size:1.5rem; letter-spacing:0.06em;">
-                        CINEMATOGRAPHY</h3>
-                    <span class="gold-line"></span>
-                    <p class="font-serif mt-3" style="font-size:0.98rem; line-height:1.85; opacity:0.7;">
-                        Camera operation and visual composition that creates atmosphere, depth, and cinematic impact for
-                        every project.
-                    </p>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="card p-8 reveal">
-                    <div class="font-display text-gold" style="font-size:2.5rem; opacity:0.3;">04</div>
-                    <h3 class="font-display text-cream mt-3" style="font-size:1.5rem; letter-spacing:0.06em;">SOUND
-                        RECORDING</h3>
-                    <span class="gold-line"></span>
-                    <p class="font-serif mt-3" style="font-size:0.98rem; line-height:1.85; opacity:0.7;">
-                        On-set and studio sound recording ensuring crisp, clean audio capture that supports the
-                        emotional power of every scene.
-                    </p>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="card p-8 reveal">
-                    <div class="font-display text-gold" style="font-size:2.5rem; opacity:0.3;">05</div>
-                    <h3 class="font-display text-cream mt-3" style="font-size:1.5rem; letter-spacing:0.06em;">CONTENT
-                        CREATION</h3>
-                    <span class="gold-line"></span>
-                    <p class="font-serif mt-3" style="font-size:0.98rem; line-height:1.85; opacity:0.7;">
-                        Digital content strategy and production for YouTube, social media, and brand platforms — built
-                        to engage and grow audiences.
-                    </p>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="card p-8 reveal">
-                    <div class="font-display text-gold" style="font-size:2.5rem; opacity:0.3;">06</div>
-                    <h3 class="font-display text-cream mt-3" style="font-size:1.5rem; letter-spacing:0.06em;">PROJECT
-                        MANAGEMENT</h3>
-                    <span class="gold-line"></span>
-                    <p class="font-serif mt-3" style="font-size:0.98rem; line-height:1.85; opacity:0.7;">
-                        End-to-end production management — coordinating teams, timelines, and budgets across private and
-                        government sector projects.
-                    </p>
+                <div
+                    class="bg-white/3 border border-red-500/15 p-8 reveal hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <div class="font-display text-red-500 text-[2.5rem]">06</div>
+                    <h3 class="font-display text-white text-[1.5rem] tracking-[0.06em] mt-3">PROJECT MANAGEMENT</h3>
+                    <div class="block h-0.5 w-15 my-3 bg-[linear-gradient(90deg,#C0392B,transparent)]"></div>
+                    <p class="font-serif text-[0.98rem] leading-[1.85] text-white/80">End-to-end production management —
+                        coordinating teams, timelines, and budgets across private and government sector projects.</p>
                 </div>
 
             </div>
@@ -644,64 +301,57 @@
     </section>
 
 
-    <!-- ══════════ WORK / PROJECT TYPES ══════════ -->
-    <section id="work" class="py-28 px-6" style="background: linear-gradient(180deg, #1a1a1a 0%, #111 100%);">
+    <!-- ══════════ WORK ══════════ -->
+    <section id="work" class="py-28 px-6 bg-[linear-gradient(180deg,#1a1a1a_0%,#111_100%)]">
         <div class="max-w-6xl mx-auto">
             <div class="mb-16 reveal">
-                <span class="section-label">Portfolio</span>
-                <span class="gold-line"></span>
-                <h2 class="font-display text-cream mt-2" style="font-size:3.5rem; letter-spacing:0.04em;">PROJECT TYPES
-                </h2>
+                <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-red-500">Portfolio</span>
+                <div class="block h-0.5 w-15 my-3 bg-[linear-gradient(90deg,#C0392B,transparent)]"></div>
+                <h2 class="font-display text-white text-[3.5rem] tracking-[0.04em] mt-2">PROJECT TYPES</h2>
             </div>
-
             <div class="grid md:grid-cols-2 gap-1">
 
-                <!-- Short Films -->
-                <div class="card reveal group p-10 relative overflow-hidden" style="min-height:200px;">
-                    <div class="absolute top-0 left-0 bottom-0 w-1" style="background:var(--gold); opacity:0.6;"></div>
-                    <span class="section-label pl-4">01 · Short Films</span>
-                    <h3 class="font-display text-cream pl-4 mt-2" style="font-size:2rem; letter-spacing:0.06em;">SHORT
-                        FILMS</h3>
-                    <p class="font-serif pl-4 mt-3" style="font-size:0.95rem; opacity:0.6; line-height:1.8;">
-                        Narrative-driven short films exploring culture, identity, and the human experience across
-                        Nigeria and beyond.
+                <div
+                    class="bg-white/3 border border-red-500/15 reveal p-10 relative overflow-hidden min-h-50 hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <div class="absolute top-0 left-0 bottom-0 w-1 bg-red opacity-70"></div>
+                    <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-red-500 pl-4">01 · Short
+                        Films</span>
+                    <h3 class="font-display text-white text-[2rem] tracking-[0.06em] mt-2 pl-4">SHORT FILMS</h3>
+                    <p class="font-serif text-[0.95rem] text-white/80 leading-[1.8] mt-3 pl-4">Narrative-driven short
+                        films
+                        exploring culture, identity, and the human experience across Nigeria and beyond.</p>
+                </div>
+
+                <div
+                    class="bg-white/3 border border-red-500/15 reveal p-10 relative overflow-hidden min-h-50 hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <div class="absolute top-0 left-0 bottom-0 w-1 bg-red opacity-70"></div>
+                    <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-red-500 pl-4">02 ·
+                        Audiovisual</span>
+                    <h3 class="font-display text-white text-[2rem] tracking-[0.06em] mt-2 pl-4">MUSIC VIDEOS</h3>
+                    <p class="font-serif text-[0.95rem] text-white/80 leading-[1.8] mt-3 pl-4">Visual artistry that
+                        amplifies the artist's vision — combining cinematic language with rhythm, energy, and culture.
                     </p>
                 </div>
 
-                <!-- Music Videos -->
-                <div class="card reveal group p-10 relative overflow-hidden" style="min-height:200px;">
-                    <div class="absolute top-0 left-0 bottom-0 w-1" style="background:var(--gold); opacity:0.6;"></div>
-                    <span class="section-label pl-4">02 · Audiovisual</span>
-                    <h3 class="font-display text-cream pl-4 mt-2" style="font-size:2rem; letter-spacing:0.06em;">MUSIC
-                        VIDEOS</h3>
-                    <p class="font-serif pl-4 mt-3" style="font-size:0.95rem; opacity:0.6; line-height:1.8;">
-                        Visual artistry that amplifies the artist's vision — combining cinematic language with rhythm,
-                        energy, and culture.
-                    </p>
+                <div
+                    class="bg-white/3 border border-red-500/15 reveal p-10 relative overflow-hidden min-h-50 hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <div class="absolute top-0 left-0 bottom-0 w-1 bg-red opacity-70"></div>
+                    <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-red-500 pl-4">03 ·
+                        Non-Fiction</span>
+                    <h3 class="font-display text-white text-[2rem] tracking-[0.06em] mt-2 pl-4">DOCUMENTARIES</h3>
+                    <p class="font-serif text-[0.95rem] text-white/80 leading-[1.8] mt-3 pl-4">Compelling documentary
+                        films
+                        that tell real stories with depth, honesty, and a powerful social message.</p>
                 </div>
 
-                <!-- Documentary -->
-                <div class="card reveal group p-10 relative overflow-hidden" style="min-height:200px;">
-                    <div class="absolute top-0 left-0 bottom-0 w-1" style="background:var(--gold); opacity:0.6;"></div>
-                    <span class="section-label pl-4">03 · Non-Fiction</span>
-                    <h3 class="font-display text-cream pl-4 mt-2" style="font-size:2rem; letter-spacing:0.06em;">
-                        DOCUMENTARIES</h3>
-                    <p class="font-serif pl-4 mt-3" style="font-size:0.95rem; opacity:0.6; line-height:1.8;">
-                        Compelling documentary films that tell real stories with depth, honesty, and a powerful social
-                        message.
-                    </p>
-                </div>
-
-                <!-- Commercials -->
-                <div class="card reveal group p-10 relative overflow-hidden" style="min-height:200px;">
-                    <div class="absolute top-0 left-0 bottom-0 w-1" style="background:var(--gold); opacity:0.6;"></div>
-                    <span class="section-label pl-4">04 · Brand Content</span>
-                    <h3 class="font-display text-cream pl-4 mt-2" style="font-size:2rem; letter-spacing:0.06em;">
-                        COMMERCIALS</h3>
-                    <p class="font-serif pl-4 mt-3" style="font-size:0.95rem; opacity:0.6; line-height:1.8;">
-                        Strategic commercial production for brands seeking impactful, audience-focused campaigns across
-                        all platforms.
-                    </p>
+                <div
+                    class="bg-white/3 border border-red-500/15 reveal p-10 relative overflow-hidden min-h-50 hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <div class="absolute top-0 left-0 bottom-0 w-1 bg-red opacity-70"></div>
+                    <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-red-500 pl-4">04 · Brand
+                        Content</span>
+                    <h3 class="font-display text-white text-[2rem] tracking-[0.06em] mt-2 pl-4">COMMERCIALS</h3>
+                    <p class="font-serif text-[0.95rem] text-white/80 leading-[1.8] mt-3 pl-4">Strategic commercial
+                        production for brands seeking impactful, audience-focused campaigns across all platforms.</p>
                 </div>
 
             </div>
@@ -710,156 +360,196 @@
 
 
     <!-- ══════════ QUOTE ══════════ -->
-    <section class="py-24 px-6"
-        style="background: radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 70%), #0d0d0d;">
+    <section class="py-24 px-6 bg-[#0d0d0d]"
+        style="background: radial-gradient(ellipse at center, rgba(192,57,43,0.08) 0%, transparent 70%), #0d0d0d;">
         <div class="max-w-3xl mx-auto text-center reveal">
-            <div class="film-strip justify-center mb-8">
-                <div class="film-hole"></div>
-                <div class="film-hole"></div>
-                <div class="film-hole"></div>
-                <div class="film-hole"></div>
-                <div class="film-hole"></div>
-                <div class="film-hole"></div>
+            <div class="flex gap-1 items-center justify-center mb-8">
+                <span class="w-2.5 h-2.5 border border-red-500/70 rounded-sm"></span>
+                <span class="w-2.5 h-2.5 border border-red-500/70 rounded-sm"></span>
+                <span class="w-2.5 h-2.5 border border-red-500/70 rounded-sm"></span>
+                <span class="w-2.5 h-2.5 border border-red-500/70 rounded-sm"></span>
+                <span class="w-2.5 h-2.5 border border-red-500/70 rounded-sm"></span>
+                <span class="w-2.5 h-2.5 border border-red-500/70 rounded-sm"></span>
             </div>
-            <blockquote class="font-serif" style="font-size:1.6rem; line-height:1.7; font-style:italic;">
-                "Powerful stories can <span class="text-gold">educate, entertain,</span><br>and create change."
+            <blockquote class="font-serif italic text-[1.6rem] leading-[1.7] text-white/85">
+                "Powerful stories can <span class="text-red-500 not-italic">educate, entertain,</span><br>and create
+                change."
             </blockquote>
-            <span class="font-mono text-xs mt-6 block" style="color:var(--dim); letter-spacing:0.2em;">— KENNETH VONGRIM
-                PONFA</span>
+            <span class="font-mono text-xs mt-6 block text-white/40 tracking-[0.2em]">— KENNETH VONGRIM PONFA</span>
         </div>
     </section>
 
 
     <!-- ══════════ EXPERIENCE ══════════ -->
-    <section id="experience" class="py-28 px-6">
+    <section id="experience" class="py-28 px-6 bg-[linear-gradient(180deg,#1a1a1a_0%,#111_100%)]">
         <div class="max-w-6xl mx-auto">
             <div class="mb-16 reveal">
-                <span class="section-label">Career</span>
-                <span class="gold-line"></span>
-                <h2 class="font-display text-cream mt-2" style="font-size:3.5rem; letter-spacing:0.04em;">EXPERIENCE
-                </h2>
+                <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-red-500">Career</span>
+                <div class="block h-0.5 w-15 my-3 bg-[linear-gradient(90deg,#C0392B,transparent)]"></div>
+                <h2 class="font-display text-white text-[3.5rem] tracking-[0.04em] mt-2">EXPERIENCE</h2>
             </div>
 
             <div class="grid md:grid-cols-2 gap-16">
 
-                <!-- Timeline -->
                 <div class="space-y-8">
 
                     <div class="flex gap-5 reveal">
                         <div class="flex flex-col items-center">
-                            <div class="timeline-dot"></div>
-                            <div class="w-px flex-1 mt-2" style="background:rgba(201,168,76,0.2);"></div>
+                            <div class="w-2.5 h-2.5 border-2 border-red-500 bg-charcoal rounded-full shrink-0 mt-1.5">
+                            </div>
+                            <div class="w-px flex-1 mt-2 bg-red-500/25"></div>
                         </div>
                         <div class="pb-8">
-                            <span class="font-mono text-xs" style="color:var(--gold); letter-spacing:0.15em;">ARTV
-                                KANO</span>
-                            <h4 class="font-display text-cream mt-1" style="font-size:1.3rem; letter-spacing:0.06em;">
-                                CAMERA OPERATOR / EDITOR</h4>
-                            <p class="font-serif mt-2" style="font-size:0.95rem; opacity:0.65; line-height:1.8;">
-                                On-air production experience for Kano's media landscape — operating cameras and editing
-                                broadcast-quality content across news, entertainment, and features.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-5 reveal">
-                        <div class="flex flex-col items-center">
-                            <div class="timeline-dot"></div>
-                            <div class="w-px flex-1 mt-2" style="background:rgba(201,168,76,0.2);"></div>
-                        </div>
-                        <div class="pb-8">
-                            <span class="font-mono text-xs" style="color:var(--gold); letter-spacing:0.15em;">FILMMINDS
-                                STUDIOS</span>
-                            <h4 class="font-display text-cream mt-1" style="font-size:1.3rem; letter-spacing:0.06em;">
+                            <span class="font-mono text-xs text-red-500 tracking-[0.15em]">ARTV KANO</span>
+                            <h4 class="font-display text-white text-[1.3rem] tracking-[0.06em] mt-1">CAMERA OPERATOR /
                                 EDITOR</h4>
-                            <p class="font-serif mt-2" style="font-size:0.95rem; opacity:0.65; line-height:1.8;">
-                                Post-production editing for film and commercial projects — assembling footage, colour
-                                grading, and sound design to craft compelling final cuts.
-                            </p>
+                            <p class="font-serif text-[0.95rem] text-white/80 leading-[1.8] mt-2">On-air production
+                                experience for Kano's media landscape — operating cameras and editing broadcast-quality
+                                content across news, entertainment, and features.</p>
                         </div>
                     </div>
 
                     <div class="flex gap-5 reveal">
                         <div class="flex flex-col items-center">
-                            <div class="timeline-dot"></div>
-                            <div class="w-px flex-1 mt-2" style="background:rgba(201,168,76,0.2);"></div>
+                            <div class="w-2.5 h-2.5 border-2 border-red-500 bg-charcoal rounded-full shrink-0 mt-1.5">
+                            </div>
+                            <div class="w-px flex-1 mt-2 bg-red-500/25"></div>
                         </div>
                         <div class="pb-8">
-                            <span class="font-mono text-xs" style="color:var(--gold); letter-spacing:0.15em;">UNC KAY
-                                STUDIOS</span>
-                            <h4 class="font-display text-cream mt-1" style="font-size:1.3rem; letter-spacing:0.06em;">
-                                EDITOR</h4>
-                            <p class="font-serif mt-2" style="font-size:0.95rem; opacity:0.65; line-height:1.8;">
-                                Editing across diverse project formats including music videos, short-form content, and
-                                branded media for studio clients.
-                            </p>
+                            <span class="font-mono text-xs text-red-500 tracking-[0.15em]">FILMMINDS STUDIOS</span>
+                            <h4 class="font-display text-white text-[1.3rem] tracking-[0.06em] mt-1">EDITOR</h4>
+                            <p class="font-serif text-[0.95rem] text-white/80 leading-[1.8] mt-2">Post-production
+                                editing
+                                for film and commercial projects — assembling footage, colour grading, and sound design
+                                to craft compelling final cuts.</p>
                         </div>
                     </div>
 
                     <div class="flex gap-5 reveal">
                         <div class="flex flex-col items-center">
-                            <div class="timeline-dot"></div>
-                            <div class="w-px flex-1 mt-2" style="background:rgba(201,168,76,0.2);"></div>
+                            <div class="w-2.5 h-2.5 border-2 border-red-500 bg-charcoal rounded-full shrink-0 mt-1.5">
+                            </div>
+                            <div class="w-px flex-1 mt-2 bg-red-500/25"></div>
+                        </div>
+                        <div class="pb-8">
+                            <span class="font-mono text-xs text-red-500 tracking-[0.15em]">UNC KAY STUDIOS</span>
+                            <h4 class="font-display text-white text-[1.3rem] tracking-[0.06em] mt-1">EDITOR</h4>
+                            <p class="font-serif text-[0.95rem] text-white/80 leading-[1.8] mt-2">Editing across diverse
+                                project formats including music videos, short-form content, and branded media for studio
+                                clients.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-5 reveal">
+                        <div class="flex flex-col items-center">
+                            <div class="w-2.5 h-2.5 border-2 border-red-500 bg-charcoal rounded-full shrink-0 mt-1.5">
+                            </div>
+                            <div class="w-px flex-1 mt-2 bg-red-500/25"></div>
                         </div>
                         <div>
-                            <span class="font-mono text-xs" style="color:var(--gold); letter-spacing:0.15em;">MOG
-                                FILMS</span>
-                            <h4 class="font-display text-cream mt-1" style="font-size:1.3rem; letter-spacing:0.06em;">
-                                CONTENT MANAGER / EDITOR / CINEMATOGRAPHER</h4>
-                            <p class="font-serif mt-2" style="font-size:0.95rem; opacity:0.65; line-height:1.8;">
-                                Leading content strategy, cinematography, and editing under his own production house —
-                                managing creative projects from development to distribution.
-                            </p>
+                            <span class="font-mono text-xs text-red-500 tracking-[0.15em]">MOG FILMS</span>
+                            <h4 class="font-display text-white text-[1.3rem] tracking-[0.06em] mt-1">CONTENT MANAGER /
+                                EDITOR / CINEMATOGRAPHER</h4>
+                            <p class="font-serif text-[0.95rem] text-white/80  leading-[1.8] mt-2">Leading content
+                                strategy,
+                                cinematography, and editing under his own production house — managing creative projects
+                                from development to distribution.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5 reveal">
+                        <div class="flex flex-col items-center">
+                            <div class="w-2.5 h-2.5 border-2 border-red-500 bg-charcoal rounded-full shrink-0 mt-1.5">
+                            </div>
+                            <div class="w-px flex-1 mt-2 bg-red-500/25"></div>
+                        </div>
+                        <div class="pb-8">
+                            <span class="font-mono text-xs text-red-500 tracking-[0.15em]">TOMRUK IHUB MULTIVERSe</span>
+                            <h4 class="font-display text-white text-[1.3rem] tracking-[0.06em] mt-1">CONTENT CREATOR
+                            </h4>
+                            <p class="font-serif text-[0.95rem] text-white/80 leading-[1.8] mt-2">Organizing and
+                                creating visual content
+                                and videos for the company across various formats and platforms.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Skills -->
                 <div class="reveal">
-                    <span class="section-label">Skills & Tools</span>
-                    <span class="gold-line"></span>
+                    <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-red-500">Skills &
+                        Tools</span>
+                    <div class="block h-0.5 w-15 my-3 bg-[linear-gradient(90deg,#C0392B,transparent)]"></div>
 
                     <div class="mt-6">
-                        <p class="font-mono text-xs mb-4" style="color:var(--dim); letter-spacing:0.2em;">PRODUCTION</p>
+                        <p class="font-mono text-xs mb-4 text-white/70 tracking-[0.2em]">PRODUCTION</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-pill">Film Direction</span>
-                            <span class="skill-pill">Cinematography</span>
-                            <span class="skill-pill">Camera Operation</span>
-                            <span class="skill-pill">Sound Recording</span>
-                            <span class="skill-pill">Lighting</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Film
+                                Direction</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Cinematography</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Camera
+                                Operation</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Sound
+                                Recording</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Lighting</span>
                         </div>
                     </div>
 
                     <div class="mt-8">
-                        <p class="font-mono text-xs mb-4" style="color:var(--dim); letter-spacing:0.2em;">
-                            POST-PRODUCTION</p>
+                        <p class="font-mono text-xs mb-4 text-white/70 tracking-[0.2em]">POST-PRODUCTION</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-pill">Video Editing</span>
-                            <span class="skill-pill">Colour Grading</span>
-                            <span class="skill-pill">Sound Design</span>
-                            <span class="skill-pill">Motion Graphics</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Video
+                                Editing</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Colour
+                                Grading</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Sound
+                                Design</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Motion
+                                Graphics</span>
                         </div>
                     </div>
 
                     <div class="mt-8">
-                        <p class="font-mono text-xs mb-4" style="color:var(--dim); letter-spacing:0.2em;">DIGITAL &
-                            STRATEGY</p>
+                        <p class="font-mono text-xs mb-4 text-white/70 tracking-[0.2em]">DIGITAL & STRATEGY</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-pill">Content Strategy</span>
-                            <span class="skill-pill">YouTube Production</span>
-                            <span class="skill-pill">Social Media Content</span>
-                            <span class="skill-pill">Project Management</span>
-                            <span class="skill-pill">Brand Storytelling</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Content
+                                Strategy</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">YouTube
+                                Production</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Social
+                                Media Content</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Project
+                                Management</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Brand
+                                Storytelling</span>
                         </div>
                     </div>
 
                     <div class="mt-8">
-                        <p class="font-mono text-xs mb-4" style="color:var(--dim); letter-spacing:0.2em;">SECTORS</p>
+                        <p class="font-mono text-xs mb-4 text-white/70 tracking-[0.2em]">SECTORS</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-pill">Private Sector</span>
-                            <span class="skill-pill">Government Sector</span>
-                            <span class="skill-pill">Entertainment</span>
-                            <span class="skill-pill">Social Impact</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Private
+                                Sector</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Government
+                                Sector</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Entertainment</span>
+                            <span
+                                class="bg-red-500/8 border border-red-500/30 text-white font-mono text-[0.65rem] tracking-widest px-3.5 py-1.25 rounded-sm hover:bg-red-500/20 transition-colors">Social
+                                Impact</span>
                         </div>
                     </div>
                 </div>
@@ -869,41 +559,36 @@
 
 
     <!-- ══════════ PRODUCTIONS ══════════ -->
-    <section class="py-28 px-6" style="background:#111;">
+    <section class="py-28 px-6 bg-[#111]">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16 reveal">
-                <span class="section-label">Owned Brands</span>
-                <span class="gold-line" style="margin:12px auto;"></span>
-                <h2 class="font-display text-cream mt-2" style="font-size:3.5rem; letter-spacing:0.04em;">PRODUCTION
-                    HOUSES</h2>
+                <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-red-500">Owned Brands</span>
+                <div class="block h-0.5 w-15 my-3 bg-[linear-gradient(90deg,#C0392B,transparent)] mx-auto"></div>
+                <h2 class="font-display text-white text-[3.5rem] tracking-[0.04em] mt-2">PRODUCTION HOUSES</h2>
             </div>
-
             <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
 
-                <div class="card p-10 text-center reveal">
-                    <img src="./src/public/k4v.jpeg" alt="vongrim films" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">
-                    <div class="font-display text-gold" style="font-size:3rem; letter-spacing:0.1em;">VF</div>
-                    <h3 class="font-display text-cream mt-3" style="font-size:1.6rem; letter-spacing:0.1em;">VONGRIM
-                        FILMS</h3>
-                    <div class="hr-gold mt-3 mb-4"></div>
-                    <p class="font-mono text-xs" style="color:var(--dim); letter-spacing:0.15em;">PRODUCTION</p>
-                    <p class="font-serif mt-4" style="font-size:0.9rem; opacity:0.65; line-height:1.8;">
-                        Full-service film and content production company delivering high-quality cinematic projects
-                        across all formats.
-                    </p>
+                <div
+                    class="bg-white/3 border border-red-500/15 text-center reveal hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <img src="./src/public/k4v.jpeg" alt="vongrim films" class="w-full h-40 object-cover mb-4">
+                    <div class="font-display text-red-500 text-[3rem] tracking-widest">VF</div>
+                    <h3 class="font-display text-white text-[1.6rem] tracking-widest mt-3">VONGRIM FILMS</h3>
+                    <div class="h-px my-3 bg-[linear-gradient(90deg,transparent,#C0392B,transparent)] opacity-35"></div>
+                    <p class="font-mono text-xs text-white/70 tracking-[0.15em]">PRODUCTION</p>
+                    <p class="font-serif text-[0.9rem] text-white/70 leading-[1.8] py-6">Full-service film and content
+                        production company delivering high-quality cinematic projects across all formats.</p>
                 </div>
 
-                <div class="card p-10 text-center reveal">
-                    <img src="./src/public/mog.jpeg" alt="mog films" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">
-                    <div class="font-display text-gold" style="font-size:3rem; letter-spacing:0.1em;">MOG</div>
-                    <h3 class="font-display text-cream mt-3" style="font-size:1.6rem; letter-spacing:0.1em;">MOG FILMS
-                    </h3>
-                    <div class="hr-gold mt-3 mb-4"></div>
-                    <p class="font-mono text-xs" style="color:var(--dim); letter-spacing:0.15em;">CONTENT & MEDIA</p>
-                    <p class="font-serif mt-4" style="font-size:0.9rem; opacity:0.65; line-height:1.8;">
-                        Digital-first media brand focused on cultural storytelling, content management, and modern
-                        digital distribution.
-                    </p>
+                <div
+                    class="bg-white/3 border border-red-500/15 text-center reveal hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <img src="./src/public/mog.jpeg" alt="mog films" class="w-full h-40 object-cover mb-4">
+                    <div class="font-display text-red-500 text-[3rem] tracking-widest">MOG</div>
+                    <h3 class="font-display text-white text-[1.6rem] tracking-widest mt-3">MOG FILMS</h3>
+                    <div class="h-px my-3 bg-[linear-gradient(90deg,transparent,#C0392B,transparent)] opacity-35"></div>
+                    <p class="font-mono text-xs text-white/70 tracking-[0.15em]">CONTENT & MEDIA</p>
+                    <p class="font-serif text-[0.9rem] text-white/70 leading-[1.8] py-6">Digital-first media brand
+                        focused
+                        on cultural storytelling, content management, and modern digital distribution.</p>
                 </div>
 
             </div>
@@ -913,70 +598,77 @@
 
     <!-- ══════════ CONTACT ══════════ -->
     <section id="contact" class="py-28 px-6"
-        style="background: radial-gradient(ellipse at top, rgba(201,168,76,0.06) 0%, transparent 60%), #1a1a1a;">
+        style="background: radial-gradient(ellipse at top, rgba(192,57,43,0.07) 0%, transparent 60%), #1a1a1a;">
         <div class="max-w-4xl mx-auto text-center">
             <div class="reveal">
-                <span class="section-label">Let's Work Together</span>
-                <span class="gold-line" style="margin:12px auto;"></span>
-                <h2 class="font-display text-cream mt-2"
-                    style="font-size:clamp(2.5rem, 6vw, 5rem); letter-spacing:0.04em; line-height:1.05;">
-                    START YOUR<br><span class="text-gold">NEXT PROJECT</span>
+                <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-red-500">Let's Work
+                    Together</span>
+                <div class="block h-0.5 w-15 my-3 bg-[linear-gradient(90deg,#C0392B,transparent)] mx-auto"></div>
+                <h2 class="font-display text-white tracking-[0.04em] leading-[1.05] text-[clamp(2.5rem,6vw,5rem)] mt-2">
+                    START YOUR<br><span class="text-red-500">NEXT PROJECT</span>
                 </h2>
-                <p class="font-serif mt-8"
-                    style="font-size:1.15rem; line-height:1.9; opacity:0.75; max-width:540px; margin:1.5rem auto 0;">
+                <p class="font-serif text-[1.15rem] leading-[1.9] text-white/70 max-w-135 mx-auto mt-6">
                     Whether you have a film concept, a brand campaign, a music video, or a documentary idea — let's
                     bring it to life together.
                 </p>
             </div>
 
             <div class="reveal mt-14 grid md:grid-cols-3 gap-6 text-left">
-                <div class="card p-7">
-                    <p class="font-mono text-xs mb-3" style="color:var(--gold); letter-spacing:0.2em;">BASED IN</p>
-                    <p class="font-serif" style="font-size:1rem; opacity:0.8;">Plateau State, Nigeria</p>
+                <div
+                    class="bg-white/3 border border-red-500/15 p-7 hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <p class="font-mono text-xs mb-3 text-red-500 tracking-[0.2em]">BASED IN</p>
+                    <p class="font-serif text-[1rem] text-white/70">Plateau State, Nigeria</p>
                 </div>
-                <div class="card p-7">
-                    <p class="font-mono text-xs mb-3" style="color:var(--gold); letter-spacing:0.2em;">PRODUCTIONS</p>
-                    <p class="font-serif" style="font-size:1rem; opacity:0.8;">Vongrim Films · MOG Films</p>
+                <div
+                    class="bg-white/3 border border-red-500/15 p-7 hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <p class="font-mono text-xs mb-3 text-red-500 tracking-[0.2em]">PRODUCTIONS</p>
+                    <p class="font-serif text-[1rem] text-white/70">Vongrim Films · MOG Films</p>
                 </div>
-                <div class="card p-7">
-                    <p class="font-mono text-xs mb-3" style="color:var(--gold); letter-spacing:0.2em;">AVAILABLE FOR</p>
-                    <p class="font-serif" style="font-size:1rem; opacity:0.8;">Film · Commercial · Documentary</p>
+                <div
+                    class="bg-white/3 border border-red-500/15 p-7 hover:border-red-500/50 hover:bg-white/6 hover:-translate-y-1 transition-all duration-300">
+                    <p class="font-mono text-xs mb-3 text-red-500 tracking-[0.2em]">AVAILABLE FOR</p>
+                    <p class="font-serif text-[1rem] text-white/70">Film · Commercial · Documentary</p>
                 </div>
             </div>
 
             <div class="reveal mt-12 flex flex-wrap justify-center gap-5">
-                <a href="mailto:kenneth@vongrimfilms.com" class="btn-primary">Send an Email</a>
-                <a href="#home" class="btn-outline">Back to Top</a>
+                <a href="mailto:kenneth@vongrimfilms.com"
+                    class="font-mono text-[0.7rem] tracking-[0.2em] uppercase bg-red-500 text-white px-9 py-3.5 rounded-sm hover:bg-red-500/80 hover:-translate-y-0.5 transition-all duration-300 no-underline inline-block">Send
+                    an Email</a>
+                <a href="#home"
+                    class="font-mono text-[0.7rem] tracking-[0.2em] uppercase border border-red-500 text-red-500 px-9 py-3.25 rounded-sm hover:bg-red-500/10 hover:-translate-y-0.5 transition-all duration-300 no-underline inline-block">Back
+                    to Top</a>
             </div>
         </div>
     </section>
 
 
     <!-- ══════════ FOOTER ══════════ -->
-    <footer class="px-6 py-10">
+    <footer class="px-6 py-10 bg-[#0d0d0d] border-t border-red-500/20">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-4">
-                <div class="film-strip">
-                    <div class="film-hole"></div>
-                    <div class="film-hole"></div>
-                    <div class="film-hole"></div>
+                <div class="flex gap-1 items-center">
+                    <span class="w-2.5 h-2.5 border border-red-500/70 rounded-sm"></span>
+                    <span class="w-2.5 h-2.5 border border-red-500/70 rounded-sm"></span>
+                    <span class="w-2.5 h-2.5 border border-red-500/70 rounded-sm"></span>
                 </div>
-                <span class="font-display text-gold" style="font-size:1rem; letter-spacing:0.1em;">KENNETH VONGRIM
-                    PONFA</span>
+                <span class="font-display text-red-500 text-[1rem] tracking-widest">KENNETH VONGRIM PONFA</span>
             </div>
-            <p class="font-mono text-xs" style="color:var(--dim); letter-spacing:0.12em;">© 2025 · VONGRIM FILMS
-                PRODUCTION · ALL RIGHTS RESERVED</p>
+            <p class="font-mono text-xs text-white/70 tracking-[0.12em]">© 2025 · VONGRIM FILMS PRODUCTION · ALL RIGHTS
+                RESERVED</p>
             <div class="flex gap-6">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#work" class="nav-link">Work</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#about"
+                    class="font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white/70 hover:text-red-500 transition-colors duration-300">About</a>
+                <a href="#work"
+                    class="font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white/70 hover:text-red-500 transition-colors duration-300">Work</a>
+                <a href="#experience"
+                    class="font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white/70 hover:text-red-500 transition-colors duration-300">Experience</a>
+                <a href="#contact"
+                    class="font-mono text-[0.7rem] tracking-[0.15em] uppercase text-white/70 hover:text-red-500 transition-colors duration-300">Contact</a>
             </div>
         </div>
     </footer>
 
-
-    <!-- ══════════ SCROLL REVEAL SCRIPT ══════════ -->
     <script src="script.js"></script>
 
 </body>
